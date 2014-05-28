@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vote on your favourite pull requests">
+    <meta name="author" content="Capaj">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Vote on your favourite pull requests and issues</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/all.css" rel="stylesheet">
+</head>
+
+<body ng-controller="mainCtrl">
+
+    <div class="container">
+        <a ng-hide="currUser" class="btn btn-default signInBtn pull-right" ng-click="logIn()">
+            <h5 >Sign in with Github</h5>
+        </a>
+        <a ng-show="currUser" class="btn btn-default signInBtn pull-right" href="/profile" >
+            <h5 ng-show="currUser" ng-bind="currUser.login"></h5>
+        </a>
+
+        <div class="masthead">
+            <h3 class="text-muted">Github Voting</h3>
+            <ul class="nav nav-justified">
+                <li ng-class="{active: view == ''}"><a href="/">Home</a></li>
+                <li ng-class="{active: view == 'repos'}"><a href="/repos">Repositories</a></li>
+                <li ng-class="{active: view == 'pulls'}"><a href="/pulls">Pull requests</a></li>
+                <li ng-class="{active: view == 'issues'}"><a href="/issues">Issues</a></li>
+            </ul>
+        </div>
+
+        <div class="body-content" ng-view>
+
+        </div>
+        <!-- /.body-content -->
+
+        <!-- Site footer -->
+        <div class="footer">
+            <p>© Capaj 2013</p>
+        </div>
+
+    </div>
+    <!-- /container -->
+    <script src="/js/angular/angular-loader.min.js"></script>
+    <script src="/js/libs/script.js/script.min.js"></script>
+    <script src="/js/main-dev.js"></script> <!--//use main-rel.js for release-->
+
+</body>
+</html>

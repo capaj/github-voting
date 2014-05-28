@@ -1,0 +1,42 @@
+{
+    "name": "GithubVoting",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "latest",
+        "connect": "latest",
+        "log4js": "latest",
+        "mongoose": "latest",
+        "socket.io": "latest",
+        "socket.io-rpc": "latest",
+        "when": "latest",
+        "request": "latest",
+        "github": "latest",
+        "querystring": "latest",
+        "async": "latest"
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-less": "latest",
+        "grunt-contrib-concat": "latest"
+    },
+    "contributors": [
+        {
+            "name": "Jiri Spac",
+            "email": "capajj@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "port": 8070,
+    "keywords": [
+        "pandacodium",
+        "socket.io"
+    ],
+    "engines": {
+        "node": ">=0.10"
+    },
+    "repository" :{
+        "type" : "git",
+        "url" : "https://github.com/Pandacodium/Capaj.git"
+    }
+}

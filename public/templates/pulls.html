@@ -1,0 +1,26 @@
+<div ng-controller="pullsCtrl">
+    <div class="repoForm">
+        <div class="form-group">
+            <input type="text" class="form-control" id="owner" placeholder="Owner" ng-model="search.owner">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="repo" placeholder="Repo" ng-model="search.repo">
+        </div>
+
+        <button class="btn btn-default" ng-click="load()">Show</button>
+    </div>
+
+    <ul class="votableItemList">
+        <li ng-repeat="pull in pulls" class="well">
+            <a ng-href="{{ pull.html_url }}"><h4 ng-bind="pull.title"></h4></a>
+            #<span ng-bind="pull.number"></span> from <a ng-href="{{ pull.user.html_url }}"><span ng-bind="pull.user.login"></span></a>
+            <div class="voteCounts">
+                <button ng-show="authorized" class="pull-left btn btn-success" ng-click="upvote(issue)">UPVOTE</button>
+                <span ng-bind="pull.upvote_count"></span><span ng-bind="pull.downvote_count"></span>
+                <button ng-show="authorized" class="pull-right btn btn-danger" ng-click="downvote(issue)">DOWNVOTE</button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+

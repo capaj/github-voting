@@ -1,0 +1,12 @@
+{
+  "name": "voteAPull",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "latest",
+    "angular-latest": "latest",
+    "angular-ui": "latest",
+    "angular-ui-bootstrap": "latest",
+    "bootstrap": "latest",
+    "moment": "latest"
+  }
+}

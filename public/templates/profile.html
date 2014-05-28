@@ -1,0 +1,11 @@
+<div ng-controller="profileCtrl">
+    <div ng-show="currUser">
+        <button ng-click="logOut()" class="btn pull-right">Log out</button>
+        <h2 ng-bind="login"></h2>
+        <img ng-src="{{ avatar_url }}" >
+        <p>Location: {{ location }}</p>
+    </div>
+    <div ng-hide="currUser">
+        <button ng-click="logIn()" class="btn btn-large">Log in</button>
+    </div>
+</div>
