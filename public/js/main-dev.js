@@ -1,9 +1,9 @@
 var cs = '/bower_components/';
-//serverURL = '//localhost:8070';
-serverURL = '//voteapull.tk:8070';
+serverURL = '//localhost:8070';
+//serverURL = '//ghvotes.tk:8070';
 
 $script([
-    cs+'jquery/jquery.js',
+    cs+'jquery/dist/jquery.js',
     serverURL+'/socket.io/socket.io.js',    //
     '/js/routes.js'
 ], function() {
