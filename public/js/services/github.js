@@ -1,17 +1,15 @@
 angular.module('Github', []).service('github', function github($rootScope, $q, $http, RPCserver) {
-    var that = this;
+    var self = this;
     var base = 'https://api.github.com';
     var token;
+    var appId;
     var ready;
     var deferredCall;
 
     this.logIn = function (token) {  //has to be called first
         if (token) { // when it is cached in localStorage
-            that.authDeferred.resolve(token);
-            that.getAuthenticatedUser().then(function (res) {
-                $rootScope.currUser = res.data;
+            self.authDeferred.resolve(token);
 
-            });
         } else {
             location.href = 'https://github.com/login/oauth/authorize?client_id=230472f58dc8a46c170c&redirect_uri='
                 + location.origin + '/login/success';
@@ -20,12 +18,12 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
     };
 
     this.init = function () {
-        that.authDeferred = $q.defer();
-        ready = that.authDeferred.promise.then(function (t) {
+        self.authDeferred = $q.defer();
+        ready = self.authDeferred.promise.then(function (t) {
             if (t) {
                 $rootScope.authorized = true;
                 localStorage['token'] = t;
-                $rootScope.currUser = that.getAuthenticatedUser();
+                $rootScope.currUser = self.getAuthenticatedUser();
                 token = t;
 
             }
@@ -43,16 +41,16 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
     };
     this.init();
     this.logOut = function () {
-        that.init();
+        self.init();
     };
 
     this.getAccessToken = function (code) {
         RPCserver.loadChannel('GithubAuth').then(function (authChannel) {
             authChannel.getAccessToken(code).then(function (token) {
-                that.authDeferred.resolve(token);
+                self.authDeferred.resolve(token);
             });
         });
-        return that.authDeferred.promise;
+        return self.authDeferred.promise;
     };
 
     var getFromApi = function (path) {
