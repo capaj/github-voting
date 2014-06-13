@@ -1,17 +1,17 @@
 angular.module('Github', []).service('github', function github($rootScope, $q, $http, RPCserver) {
     var self = this;
-    var base = 'https://api.github.com';
+    var baseUrl = 'https://api.github.com';
     var token;
-    var appId;
+	var tokenKey = 'github_token';
     var ready;
     var deferredCall;
 
-    this.logIn = function (token) {  //has to be called first
+    this.logIn = function (token, appId) {  //has to be called first
         if (token) { // when it is cached in localStorage
             self.authDeferred.resolve(token);
 
         } else {
-            location.href = 'https://github.com/login/oauth/authorize?client_id=230472f58dc8a46c170c&redirect_uri='
+            location.href = 'https://github.com/login/oauth/authorize?client_id=' + appId + '&redirect_uri='
                 + location.origin + '/login/success';
         }
 
@@ -22,7 +22,7 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
         ready = self.authDeferred.promise.then(function (t) {
             if (t) {
                 $rootScope.authorized = true;
-                localStorage['token'] = t;
+                localStorage[tokenKey] = t;
                 $rootScope.currUser = self.getAuthenticatedUser();
                 token = t;
 
@@ -40,6 +40,7 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
         };
     };
     this.init();
+
     this.logOut = function () {
         self.init();
     };
@@ -56,9 +57,9 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
     var getFromApi = function (path) {
         var pr;
         if (token) {
-            pr = $http.get(base + path + '?access_token=' + token);
+            pr = $http.get(baseUrl + path + '?access_token=' + token);
         } else {
-            pr = $http.get(base + path);
+            pr = $http.get(baseUrl + path);
         }
         return pr.then(function (res) {
                 if (res.status !== 200) {
@@ -68,7 +69,7 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
             },
             function (res) {
                 if (res.status == 401 || res.status == 403) {
-                    delete localStorage['token'];
+                    delete localStorage[tokenKey];
                 }
                 console.error("Github api call ended in error.");
             });
