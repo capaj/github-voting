@@ -29,7 +29,7 @@ app = angular.module('githubVoting', appModuleDependencies)
 
         var cachedToken = localStorage['token'];  // for production
         if (cachedToken) {
-            github.logIn(cachedToken);
+            github.authorizeWithToken(cachedToken);
         }
     }
 );

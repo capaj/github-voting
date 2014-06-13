@@ -6,16 +6,20 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
     var ready;
     var deferredCall;
 
-    this.logIn = function (token, appId) {  //has to be called first
-        if (token) { // when it is cached in localStorage
-            self.authDeferred.resolve(token);
-
-        } else {
-            location.href = 'https://github.com/login/oauth/authorize?client_id=' + appId + '&redirect_uri='
-                + location.origin + '/login/success';
-        }
-
+	/**
+	 * @param {String} token
+	 */
+    this.logIn = function (appId) {  //has to be called first
+		location.href = 'https://github.com/login/oauth/authorize?client_id=' + appId + '&redirect_uri='
+			+ location.origin + '/login/success';
     };
+
+	/**
+	 * @param {String} token
+	 */
+	this.authorizeWithToken = function (token) {
+		self.authDeferred.resolve(token);
+	};
 
     this.init = function () {
         self.authDeferred = $q.defer();

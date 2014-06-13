@@ -31,7 +31,7 @@ $script([
                 '/js/controllers/pulls-ctrl.js',
                 '/js/controllers/issues-ctrl.js',
                 '/js/controllers/repos-ctrl.js',
-                'https://raw.github.com/jprichardson/string.js/master/lib/string.min.js'
+                '/js/libs/string.js/string.min.js'
             ], function() {
                 angular.bootstrap(document, ['githubVoting']);
 
