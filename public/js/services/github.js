@@ -7,10 +7,10 @@ angular.module('Github', []).service('github', function github($rootScope, $q, $
     var deferredCall;
 
 	/**
-	 * @param {String} token
+	 * @param {String} clientID from your github app(can be found in settings)
 	 */
-    this.logIn = function (appId) {  //has to be called first
-		location.href = 'https://github.com/login/oauth/authorize?client_id=' + appId + '&redirect_uri='
+    this.logIn = function (clientID) {  //has to be called first
+		location.href = 'https://github.com/login/oauth/authorize?client_id=' + clientID + '&redirect_uri='
 			+ location.origin + '/login/success';
     };
 

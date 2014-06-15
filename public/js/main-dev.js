@@ -1,6 +1,6 @@
 var cs = '/bower_components/';
-serverURL = '//localhost:8070';
-//serverURL = '//ghvotes.tk:8070';
+//serverURL = '//localhost:8070';
+serverURL = '//ghvotes.tk:8070';
 
 $script([
     cs+'jquery/dist/jquery.js',

@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var when = require('when');
 var secrets = require('../secrets.json');
 
 
