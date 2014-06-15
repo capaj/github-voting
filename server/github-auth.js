@@ -30,15 +30,20 @@ rpc.expose('GithubAuth', {
 module.exports = {
     routeFn: function (req, res) {
         if (req.query.code) {
-            var postData = {form: {client_id: secrets.github.clientId,
-                client_secret: secrets.github.secret,
-                code: req.query.code
-            }};
+            var postData = {
+                form: {
+                    client_id: secrets.github.clientId,
+                    client_secret: secrets.github.secret,
+                    code: req.query.code
+                }
+            };
             request.post(
                 'https://github.com/login/oauth/access_token', postData, function (e, r, body) {
                     if (!e) {
                         var authRes = qs.parse(body);
                         authRes.access_token && cache(req.query.code, authRes.access_token);
+                    } else {
+                        console.error("Failed to fetch acces token for code");
                     }
                     res.sendfile('./public/index.html');
                 }
